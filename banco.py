@@ -13,6 +13,7 @@ def main() -> None:
 
 
 def menu() -> None:
+    print()
     print('=' * 50)
     print('BANCO'.center(50, '='))
     print('Projeto Banco'.center(50, '='))
@@ -62,6 +63,8 @@ def criar_conta() -> None:
     cliente: Cliente = Cliente(nome, email, cpf, data_nascimento)
     conta: Conta = Conta(cliente)
 
+    contas.append(conta)
+
     print(f'''
     Conta criada com sucesso.
     Dados da conta:
@@ -73,15 +76,16 @@ def criar_conta() -> None:
 
 def efetuar_saque() -> None:
     if len(contas) > 0:
-        numero: int = input_numero_int('Informe o número da sua conta: ')
+        numero: int = input_numero_int('Informe o número da sua conta ')
 
         conta: Conta = buscar_conta_por_numero(numero)
 
         if conta:
-            valor: float = input_numero_float('Informe o valor do saque: ')
+            valor: float = input_numero_float('Informe o valor do saque ')
             conta.sacar(valor)
         else:
             print(f'Não foi encontrada a conta com número {numero}')
+        menu()
 
     else:
         print('Não existem contas cadastradas.')
@@ -91,11 +95,11 @@ def efetuar_saque() -> None:
 
 def efetuar_deposito() -> None:
     if len(contas) > 0:
-        numero: int = input_numero_int('Informe o número da sua conta: ')
+        numero: int = input_numero_int('Informe o número da sua conta ')
         conta: Conta = buscar_conta_por_numero(numero)
 
         if conta:
-            valor: float = input_numero_float('Informe o valor do depósito: ')
+            valor: float = input_numero_float('Informe o valor do depósito ')
             conta.depositar(valor)
         else:
             print(f'Não foi encontrado a conta com o número {numero}')
@@ -107,15 +111,15 @@ def efetuar_deposito() -> None:
 
 def efetuar_transferencia() -> None:
     if len(contas) > 0:
-        numero_origem: int = input_numero_int('Informe o número da sua conta: ')
+        numero_origem: int = input_numero_int('Informe o número da sua conta ')
         conta_origem: Conta = buscar_conta_por_numero(numero_origem)
 
         if conta_origem:
-            numero_destino: int = input_numero_int('Informe o número da conta destino: ')
+            numero_destino: int = input_numero_int('Informe o número da conta destino ')
             conta_destino: Conta = buscar_conta_por_numero(numero_destino)
 
             if conta_destino:
-                valor: float = input_numero_float('Informe o valor da transferência: ')
+                valor: float = input_numero_float('Informe o valor da transferência ')
                 conta_origem.transferir(conta_destino, valor)
             else:
                 print(f'A conta destino com número {numero_destino} não foi encontrado.')
@@ -131,11 +135,13 @@ def efetuar_transferencia() -> None:
 def listar_contas() -> None:
     if len(contas) > 0:
         print('Listagem de contas')
+        print('-' * 30)
 
         for conta in contas:
             print(conta)
             print('-' * 30)
             sleep(1)
+        menu()
 
     else:
         print('Não existem contas cadastradas.')
