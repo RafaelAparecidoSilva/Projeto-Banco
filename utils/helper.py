@@ -15,3 +15,23 @@ def str_para_date(data: str) -> date:
 
 def formata_float_str_moeda(valor: float) -> str:
     return locale.currency(valor, grouping=True, symbol=True)
+
+
+def input_numero_int(texto_entrada):
+    while True:
+        try:
+            numero: int = int(input(f'{texto_entrada}: ').strip())
+            break
+        except ValueError:
+            print('Digite um número.\n')
+    return numero
+
+
+def input_numero_float(texto_entrada):
+    while True:
+        try:
+            valor: int = int(input(f'{texto_entrada}: ').strip())
+            break
+        except ValueError:
+            print('Digite um valor.\n')
+    return valor

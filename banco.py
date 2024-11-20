@@ -2,6 +2,7 @@ from typing import List
 from models.conta import Conta
 from models.cliente import Cliente
 from time import sleep
+from utils.helper import input_numero_int, input_numero_float
 
 
 contas: List[Conta] = []
@@ -27,12 +28,7 @@ def menu() -> None:
     6) Sair do sistema
     ''')
 
-    while True:
-        try:
-            opcao: int = int(input('Digite sua opção: '))
-            break
-        except:
-            print('Digite um número.\n')
+    opcao: int = input_numero_int('Digite sua opção')
 
     match opcao:
         case 1:
@@ -76,11 +72,35 @@ def criar_conta() -> None:
 
 
 def efetuar_saque() -> None:
-    pass
+    if len(contas) > 0:
+        numero: int = input_numero_int('Informe o número da sua conta: ')
+
+        conta: Conta = buscar_conta_por_numero(numero)
+
+        if conta:
+            valor: float = input_numero_float('Informe o valor do saque: ')
+            conta.sacar(valor)
+        else:
+            print(f'Não foi encontrada a conta com número {numero}')
+
+    else:
+        print('Não existem contas cadastradas.')
+        sleep(2)
+        menu()
 
 
 def efetuar_deposito() -> None:
-    pass
+    if len(contas) > 0:
+        numero: int = input_numero_int('Informe o número da sua conta: ')
+        conta: Conta = buscar_conta_por_numero(numero)
+
+        if conta:
+            valor: float = input_numero_float('Informe o valor do depósito: ')
+            conta.depositar(valor)
+    else:
+        print('Ainda não existem contas cadastradas.')
+    sleep(2)
+    menu()
 
 
 def efetuar_transferencia() -> None:
