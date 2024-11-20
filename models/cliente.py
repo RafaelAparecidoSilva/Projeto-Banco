@@ -38,6 +38,5 @@ class Cliente:
     def data_cadastro(self) -> str:
         return date_para_str(self.__data_cadastro)
 
-    @property
     def __str__(self) -> str:
         return f'Código: {self.codigo} \nNome: {self.nome} \nData de Nascimento: {self.data_nascimento} \nCadastro: {self.data_cadastro}'

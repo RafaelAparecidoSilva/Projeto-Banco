@@ -14,7 +14,7 @@ class Conta:
         Conta.codigo += 1
 
     def __str__(self) -> str:
-        return f'Número da conta: {self.numero} \nCliente: {self.cliente} \nSaldo Total: {formata_float_str_moeda(self.saldo_total)}'
+        return f'Número da conta: {self.numero} \nCliente: {self.cliente.nome} \nSaldo Total: {formata_float_str_moeda(self.saldo_total)}'
 
     @property
     def numero(self) -> int:
